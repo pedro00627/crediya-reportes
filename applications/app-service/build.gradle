@@ -1,11 +1,19 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-	implementation project(':reactive-web')
+    implementation project(':reactive-web')
     implementation project(':model')
     implementation project(':usecase')
     implementation 'org.springframework.boot:spring-boot-starter'
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
+
+    // Dependencias a las librerías common
+    implementation "co.com.pragma:crediya-common-starter:${commonVersion}"
+    implementation "co.com.pragma:crediya-common-security:${commonVersion}"
+
+    // Log4j2 YAML support
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+
     testImplementation 'com.tngtech.archunit:archunit:1.4.1'
     testImplementation 'com.fasterxml.jackson.core:jackson-databind'
 }

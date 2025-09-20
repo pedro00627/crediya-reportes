@@ -1,5 +1,7 @@
-.gradle
-.idea
-build
-out
-*.iml
+# Ignorar carpetas y archivos innecesarios
+build/
+.gradle/
+*.jar
+*.class
+*.log
+node_modules/

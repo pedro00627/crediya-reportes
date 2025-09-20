@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8082
 spring:
   application:
     name: "Reportes"
@@ -20,11 +20,9 @@ management:
     health:
       probes:
         enabled: true
-cors:
-  allowed-origins: "http://localhost:4200,http://localhost:8080"
 jwt:
-  secret: "your-secret-key-that-is-at-least-256-bits-long"
-  expiration: 3600000 # 1 hour in milliseconds
+  secret: ${JWT_SECRET:-crediya_jwt_secret_key_2024_super_secure}
+  expiration: ${JWT_EXPIRATION:-3600000}
   excluded-paths:
     - /swagger-ui.html
     - /swagger-ui/**
@@ -35,10 +33,10 @@ security:
   rules:
     authorization:
       - path: /swagger-ui.html
-        roles: [ROLE_ANONYMOUS]
+        roles: [ ROLE_ANONYMOUS ]
       - path: /swagger-ui/**
-        roles: [ROLE_ANONYMOUS]
+        roles: [ ROLE_ANONYMOUS ]
       - path: /webjars/**
-        roles: [ROLE_ANONYMOUS]
+        roles: [ ROLE_ANONYMOUS ]
       - path: /v3/api-docs/**
-        roles: [ROLE_ANONYMOUS]
+        roles: [ ROLE_ANONYMOUS ]

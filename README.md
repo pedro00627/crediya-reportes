@@ -40,16 +40,20 @@ El servicio se ejecuta en el puerto **8082** y se conecta a DynamoDB local en el
 El proyecto implementa Clean Architecture con los siguientes módulos:
 
 ### Domain
+
 Encapsula la lógica y reglas del negocio para generación de reportes.
 
 ### Usecases
+
 Implementa los casos de uso para consultas y agregaciones de datos.
 
 ### Infrastructure
+
 - **Driven Adapters**: Conexión a DynamoDB para consultas optimizadas
 - **Entry Points**: APIs REST para consumo de reportes
 
 ### Application
+
 Ensambla los módulos, resuelve dependencias y configura la aplicación.
 
 **Los beans de los casos de uso se disponibilizan automáticamente gracias a '@ComponentScan'.**

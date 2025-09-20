@@ -2,6 +2,7 @@ package co.com.pragma.api.security;
 
 import co.com.pragma.model.security.RoleConstants;
 import org.springframework.security.authorization.AuthorizationDecision;
+import org.springframework.security.authorization.AuthorizationResult;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +15,11 @@ public class UserAuthorizationManager implements ReactiveAuthorizationManager<Au
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> authentication, AuthorizationContext context) {
+        return authorize(authentication, context).cast(AuthorizationDecision.class);
+    }
+
+    @Override
+    public Mono<AuthorizationResult> authorize(Mono<Authentication> authentication, AuthorizationContext context) {
         return authentication
                 .map(auth -> {
                     // Regla 1: Si es ADMIN o ADVISOR, tiene acceso.
@@ -33,6 +39,7 @@ public class UserAuthorizationManager implements ReactiveAuthorizationManager<Au
 
                     return new AuthorizationDecision(isOwner);
                 })
-                .defaultIfEmpty(new AuthorizationDecision(false));
+                .defaultIfEmpty(new AuthorizationDecision(false))
+                .cast(AuthorizationResult.class);
     }
 }
